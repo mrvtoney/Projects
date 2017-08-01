@@ -1,0 +1,50 @@
+<?php
+
+namespace 
+{
+    class AppKerne_ extends AppKernel
+    {
+        public function getCacheDir()
+        {
+            return '/Users/vincent/fortune_builders/var/cache/de_';
+        }
+
+        public function getRootDir()
+        {
+            return '/Users/vincent/fortune_builders/app';
+        }
+
+                public function getProjectDir()
+        {
+            return '/Users/vincent/fortune_builders';
+        }
+        
+        public function getLogDir()
+        {
+            return '/Users/vincent/fortune_builders/var/logs';
+        }
+
+        protected function getContainerClass()
+        {
+            return 'appDevDebugProjectContaine_';
+        }
+
+        protected function buildContainer()
+        {
+            $container = parent::buildContainer();
+
+            // filter container's resources, removing reference to temp kernel file
+            $resources = $container->getResources();
+            $filteredResources = array();
+            foreach ($resources as $resource) {
+                if ((string) $resource !== __FILE__) {
+                    $filteredResources[] = $resource;
+                }
+            }
+
+            $container->setResources($filteredResources);
+
+            return $container;
+        }
+    }
+}
