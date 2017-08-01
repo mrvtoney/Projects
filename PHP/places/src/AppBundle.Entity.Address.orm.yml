@@ -1,0 +1,49 @@
+AppBundle\Entity\Address:
+    type: entity
+    table: address
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        street:
+            type: string
+            length: 50
+            options:
+                fixed: false
+            nullable: false
+        city:
+            type: string
+            length: 30
+            options:
+                fixed: false
+            nullable: false
+        state:
+            type: string
+            length: 30
+            options:
+                fixed: false
+            nullable: false
+        zip:
+            type: string
+            length: 10
+            options:
+                fixed: false
+            nullable: false
+        country:
+            type: string
+            length: 30
+            options:
+                fixed: false
+            nullable: false
+        createddate:
+            type: datetime
+            options:
+                default: CURRENT_TIMESTAMP
+            nullable: false
+            column: createdDate
+    lifecycleCallbacks: {  }

@@ -1,0 +1,159 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Organization
+ *
+ * @ORM\Table(name="organization")
+ * @ORM\Entity
+ */
+class Organization
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="addressID", type="integer", nullable=true)
+     */
+    private $addressid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=30, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdDate", type="datetime", nullable=false)
+     */
+    private $createddate = 'CURRENT_TIMESTAMP';
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set addressid
+     *
+     * @param integer $addressid
+     *
+     * @return Organization
+     */
+    public function setAddressid($addressid)
+    {
+        $this->addressid = $addressid;
+
+        return $this;
+    }
+
+    /**
+     * Get addressid
+     *
+     * @return integer
+     */
+    public function getAddressid()
+    {
+        return $this->addressid;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Organization
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Organization
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set createddate
+     *
+     * @param \DateTime $createddate
+     *
+     * @return Organization
+     */
+    public function setCreateddate($createddate)
+    {
+        $this->createddate = $createddate;
+
+        return $this;
+    }
+
+    /**
+     * Get createddate
+     *
+     * @return \DateTime
+     */
+    public function getCreateddate()
+    {
+        return $this->createddate;
+    }
+}

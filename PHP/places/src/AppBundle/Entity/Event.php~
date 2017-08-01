@@ -1,0 +1,221 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Event
+ *
+ * @ORM\Table(name="event")
+ * @ORM\Entity
+ */
+class Event
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="userId", type="integer", nullable=true)
+     */
+    private $userid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=30, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdDate", type="datetime", nullable=false)
+     */
+    private $createddate = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="startDateTime", type="datetime", nullable=false)
+     */
+    private $startdatetime = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="endDateTime", type="datetime", nullable=false)
+     */
+    private $enddatetime = 'CURRENT_TIMESTAMP';
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set userid
+     *
+     * @param integer $userid
+     *
+     * @return Event
+     */
+    public function setUserid($userid)
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    /**
+     * Get userid
+     *
+     * @return integer
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Event
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return Event
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set createddate
+     *
+     * @param \DateTime $createddate
+     *
+     * @return Event
+     */
+    public function setCreateddate($createddate)
+    {
+        $this->createddate = $createddate;
+
+        return $this;
+    }
+
+    /**
+     * Get createddate
+     *
+     * @return \DateTime
+     */
+    public function getCreateddate()
+    {
+        return $this->createddate;
+    }
+
+    /**
+     * Set startdatetime
+     *
+     * @param \DateTime $startdatetime
+     *
+     * @return Event
+     */
+    public function setStartdatetime($startdatetime)
+    {
+        $this->startdatetime = $startdatetime;
+
+        return $this;
+    }
+
+    /**
+     * Get startdatetime
+     *
+     * @return \DateTime
+     */
+    public function getStartdatetime()
+    {
+        return $this->startdatetime;
+    }
+
+    /**
+     * Set enddatetime
+     *
+     * @param \DateTime $enddatetime
+     *
+     * @return Event
+     */
+    public function setEnddatetime($enddatetime)
+    {
+        $this->enddatetime = $enddatetime;
+
+        return $this;
+    }
+
+    /**
+     * Get enddatetime
+     *
+     * @return \DateTime
+     */
+    public function getEnddatetime()
+    {
+        return $this->enddatetime;
+    }
+}

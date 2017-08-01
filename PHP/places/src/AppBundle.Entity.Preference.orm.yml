@@ -1,0 +1,31 @@
+AppBundle\Entity\Preference:
+    type: entity
+    table: preference
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        attributeid:
+            type: integer
+            options:
+                unsigned: false
+            nullable: true
+            column: attributeID
+        userid:
+            type: integer
+            options:
+                unsigned: false
+            nullable: true
+            column: userID
+        createddate:
+            type: datetime
+            options:
+                default: CURRENT_TIMESTAMP
+            nullable: false
+            column: createdDate
+    lifecycleCallbacks: {  }

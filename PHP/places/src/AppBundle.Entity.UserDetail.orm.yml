@@ -1,0 +1,36 @@
+AppBundle\Entity\UserDetail:
+    type: entity
+    table: user_detail
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        userid:
+            type: integer
+            options:
+                unsigned: true
+            nullable: false
+            column: userID
+        addressid:
+            type: integer
+            options:
+                unsigned: true
+            nullable: false
+            column: addressID
+        phone:
+            type: integer
+            options:
+                unsigned: true
+            nullable: false
+        updatedate:
+            type: datetime
+            options:
+                default: CURRENT_TIMESTAMP
+            nullable: false
+            column: updateDate
+    lifecycleCallbacks: {  }

@@ -1,0 +1,128 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ProductAttribute
+ *
+ * @ORM\Table(name="product_attribute")
+ * @ORM\Entity
+ */
+class ProductAttribute
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="productID", type="integer", nullable=true)
+     */
+    private $productid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="attributeID", type="integer", nullable=true)
+     */
+    private $attributeid;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="createdDate", type="datetime", nullable=false)
+     */
+    private $createddate = 'CURRENT_TIMESTAMP';
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set productid
+     *
+     * @param integer $productid
+     *
+     * @return ProductAttribute
+     */
+    public function setProductid($productid)
+    {
+        $this->productid = $productid;
+
+        return $this;
+    }
+
+    /**
+     * Get productid
+     *
+     * @return integer
+     */
+    public function getProductid()
+    {
+        return $this->productid;
+    }
+
+    /**
+     * Set attributeid
+     *
+     * @param integer $attributeid
+     *
+     * @return ProductAttribute
+     */
+    public function setAttributeid($attributeid)
+    {
+        $this->attributeid = $attributeid;
+
+        return $this;
+    }
+
+    /**
+     * Get attributeid
+     *
+     * @return integer
+     */
+    public function getAttributeid()
+    {
+        return $this->attributeid;
+    }
+
+    /**
+     * Set createddate
+     *
+     * @param \DateTime $createddate
+     *
+     * @return ProductAttribute
+     */
+    public function setCreateddate($createddate)
+    {
+        $this->createddate = $createddate;
+
+        return $this;
+    }
+
+    /**
+     * Get createddate
+     *
+     * @return \DateTime
+     */
+    public function getCreateddate()
+    {
+        return $this->createddate;
+    }
+}

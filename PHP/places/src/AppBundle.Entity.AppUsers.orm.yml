@@ -1,0 +1,73 @@
+AppBundle\Entity\AppUsers:
+    type: entity
+    table: app_users
+    uniqueConstraints:
+        UNIQ_C2502824F85E0677:
+            columns:
+                - username
+        UNIQ_C2502824E7927C74:
+            columns:
+                - email
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: false
+            generator:
+                strategy: IDENTITY
+    fields:
+        username:
+            type: string
+            length: 25
+            options:
+                fixed: false
+            nullable: false
+        password:
+            type: string
+            length: 64
+            options:
+                fixed: false
+            nullable: false
+        email:
+            type: string
+            length: 60
+            options:
+                fixed: false
+            nullable: false
+        isActive:
+            type: boolean
+            nullable: false
+            column: is_active
+        firstname:
+            type: string
+            length: 25
+            options:
+                fixed: false
+            nullable: false
+        lastname:
+            type: string
+            length: 25
+            options:
+                fixed: false
+            nullable: false
+        roles:
+            type: json_array
+            options:
+                fixed: false
+            nullable: false
+        dummyRoles:
+            type: string
+            length: 16
+            options:
+                fixed: false
+            nullable: true
+            column: dummy_roles
+        plainAssword:
+            type: string
+            length: 16
+            options:
+                fixed: false
+            nullable: true
+            column: plain_assword
+    lifecycleCallbacks: {  }

@@ -1,0 +1,25 @@
+AppBundle\Entity\UserType:
+    type: entity
+    table: user_type
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        userid:
+            type: integer
+            options:
+                unsigned: false
+            nullable: true
+            column: userID
+        typeid:
+            type: integer
+            options:
+                unsigned: false
+            nullable: true
+            column: typeID
+    lifecycleCallbacks: {  }

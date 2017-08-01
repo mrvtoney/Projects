@@ -1,0 +1,190 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Contact
+ *
+ * @ORM\Table(name="contact")
+ * @ORM\Entity
+ */
+class Contact
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="userID", type="integer", nullable=true)
+     */
+    private $userid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="contactUserID", type="integer", nullable=true)
+     */
+    private $contactuserid;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="status", type="string", length=30, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="requestedDate", type="datetime", nullable=false)
+     */
+    private $requesteddate = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updatedDate", type="datetime", nullable=false)
+     */
+    private $updateddate = 'CURRENT_TIMESTAMP';
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set userid
+     *
+     * @param integer $userid
+     *
+     * @return Contact
+     */
+    public function setUserid($userid)
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    /**
+     * Get userid
+     *
+     * @return integer
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+
+    /**
+     * Set contactuserid
+     *
+     * @param integer $contactuserid
+     *
+     * @return Contact
+     */
+    public function setContactuserid($contactuserid)
+    {
+        $this->contactuserid = $contactuserid;
+
+        return $this;
+    }
+
+    /**
+     * Get contactuserid
+     *
+     * @return integer
+     */
+    public function getContactuserid()
+    {
+        return $this->contactuserid;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     *
+     * @return Contact
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set requesteddate
+     *
+     * @param \DateTime $requesteddate
+     *
+     * @return Contact
+     */
+    public function setRequesteddate($requesteddate)
+    {
+        $this->requesteddate = $requesteddate;
+
+        return $this;
+    }
+
+    /**
+     * Get requesteddate
+     *
+     * @return \DateTime
+     */
+    public function getRequesteddate()
+    {
+        return $this->requesteddate;
+    }
+
+    /**
+     * Set updateddate
+     *
+     * @param \DateTime $updateddate
+     *
+     * @return Contact
+     */
+    public function setUpdateddate($updateddate)
+    {
+        $this->updateddate = $updateddate;
+
+        return $this;
+    }
+
+    /**
+     * Get updateddate
+     *
+     * @return \DateTime
+     */
+    public function getUpdateddate()
+    {
+        return $this->updateddate;
+    }
+}

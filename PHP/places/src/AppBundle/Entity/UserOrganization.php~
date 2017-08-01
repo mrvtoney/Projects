@@ -1,0 +1,97 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * UserOrganization
+ *
+ * @ORM\Table(name="user_organization")
+ * @ORM\Entity
+ */
+class UserOrganization
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="organizationID", type="integer", nullable=true)
+     */
+    private $organizationid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="userID", type="integer", nullable=true)
+     */
+    private $userid;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set organizationid
+     *
+     * @param integer $organizationid
+     *
+     * @return UserOrganization
+     */
+    public function setOrganizationid($organizationid)
+    {
+        $this->organizationid = $organizationid;
+
+        return $this;
+    }
+
+    /**
+     * Get organizationid
+     *
+     * @return integer
+     */
+    public function getOrganizationid()
+    {
+        return $this->organizationid;
+    }
+
+    /**
+     * Set userid
+     *
+     * @param integer $userid
+     *
+     * @return UserOrganization
+     */
+    public function setUserid($userid)
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    /**
+     * Get userid
+     *
+     * @return integer
+     */
+    public function getUserid()
+    {
+        return $this->userid;
+    }
+}

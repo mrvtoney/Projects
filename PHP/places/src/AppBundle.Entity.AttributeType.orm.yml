@@ -1,0 +1,31 @@
+AppBundle\Entity\AttributeType:
+    type: entity
+    table: attribute_type
+    id:
+        id:
+            id: true
+            type: integer
+            options:
+                unsigned: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            length: 30
+            options:
+                fixed: true
+            nullable: true
+        description:
+            type: string
+            length: 255
+            options:
+                fixed: false
+            nullable: true
+        createddate:
+            type: datetime
+            options:
+                default: CURRENT_TIMESTAMP
+            nullable: false
+            column: createdDate
+    lifecycleCallbacks: {  }
