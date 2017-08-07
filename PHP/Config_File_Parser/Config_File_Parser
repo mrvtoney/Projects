@@ -1,0 +1,257 @@
+<?php
+
+class Config_File_Parser
+{
+
+	/**
+	  * @var string|null   Should contain a file name and prefixed by its directory (if necessary)
+	  */
+	private $fileName 	= null;
+
+	/**
+	  * @var string|null   Should contain the config name that the user will like to retrieve
+	  */
+	private $configName = null;
+
+	/**
+	  * Handles the initializing of class properties based on command line arguments
+	  */
+	public function __construct () {
+		$options = getopt("f:c:");
+		if (!isset($options['f'], $options['c'])){
+			print_r("Required parameters not provided. Please use -f and -c\n");
+			exit;
+		}
+
+		$this->fileName = $options['f'];
+		$this->configName = $options['c'];
+	}
+
+	/**
+	  *	Runs the script to return the config value based on the provided config name
+	  *
+	  * @return  string
+	  */
+	public function run() {
+		try {
+			$fh = $this->openFile($this->fileName);
+			$configs = $this->processConfigFile($fh);
+			$this->closeFile($fh);
+
+			$configValue = $this->getConfigValueByName($this->configName, $configs);
+			if (is_null($configValue)) {
+				print_r("The config {$this->configName} does not exist \n");
+			} else {
+				print_r("The value for the config: {$this->configName} is : $configValue \n");
+			}
+		} catch (Exception $e) {
+			$this->errorMsg($e);
+		}
+	}
+
+	/**
+	  *	Gets the boolean value of a string
+	  *
+	  *	@param 	string  $string  string representation of acceptable boolean values
+	  *
+	  * @return  bool
+	  */
+	private function getBoolean($string) {
+		$trueBool = false;
+		if (!isset($string)) {
+			return $trueBool;
+		}
+
+		switch ($string) {
+			case 'yes' :
+			case 'on'  :
+			case 'true':
+				$trueBool = true;
+				break;
+		}
+
+		return $trueBool;
+	}
+
+	/**
+	  *	Checks to see if the string is boolean
+	  *
+	  *	@param 	string  $string  string representation of acceptable boolean values
+	  *
+	  * @return  bool
+	  */
+	private function isBool($string) {
+		$isBool = false;
+		if (!isset($string)
+			|| is_numeric($string)) {
+			return $isBool;
+		}
+
+		switch ($string) {
+			case 'yes'  :
+			case 'no'	:
+			case 'true' :
+			case 'false':
+			case 'on'   :
+			case 'off'  :
+				$isBool = true;
+				break;
+		}
+
+		return $isBool;
+	}
+
+	/**
+	  *	Gets the numeric value of a string
+	  *
+	  *	@param 	string  $string  string representation of acceptable numeric value
+	  *
+	  * @return integer
+	  */
+	private function getNumeric($string) {
+		$numeric= 0;
+		if (!isset($string)
+			|| !is_numeric($string)) {
+			return $numeric;
+		}
+
+		return $string;
+	}
+
+	/**
+	  *	Check to see if a string is numeric
+	  *
+	  *	@param 	string  $string  shows if the string is numeric
+	  *
+	  * @return  bool
+	  */
+	private function isNumeric ($string) {
+		$isBool = false;
+		if (!isset($string)
+			|| !is_numeric($string)) {
+			return $isBool;
+		}
+
+		return $isBool = true;
+	}
+
+	/**
+	  * Grabs the config value based on the config name
+	  *
+	  * @param   string   $name     the name of the config that the value should get retrieved from
+	  * @param   array    $configs  the config files that are coming from the file
+	  *
+	  * @return  string   
+	  */
+	private function getConfigValueByName($name, $configs) {
+		if (!isset($name)) {
+			throw new Exception("Invalid config name (config name was not provided)");
+			return null;
+		}
+
+		if (!isset($configs)) {
+			throw new Exception("No configs found in file");
+		}
+
+	    if (in_array($name, $configs)) {
+	    	return $configs[$name];
+		}
+
+		return null;
+	}
+
+	/**
+	  * Opens a file based on a file name
+	  * 
+	  * @param  string  $fileName  name of the file to open
+	  *
+	  * @return fileHandler
+	  */
+	private function openFile($fileName) {
+		if (!isset($fileName)) {
+			throw new Exception("Invalid file name (file name not provided)");
+			return null;
+		}
+
+		$fh = fopen($fileName, "r");
+	//	if (!feof($fh)) {
+	//		throw new Exception("Error occurred while trying to open file. Check filename and try again");
+	//	}
+
+		return $fh;
+	}
+
+	/**
+	  * Closes the open file
+	  *
+	  * @param  fileHandler  fh  filehandled of the open file
+	  */
+	private function closeFile($fh) {
+		fclose($fh);
+	}
+
+	/**
+	  * Helper for displaying the error message
+	  *
+	  * @param  string  $errorMsg   The error message that will display via command line
+	  */
+	private function errorMsg ($errorMsg) {
+		echo "The following error has occurred : " . $errorMsg;
+	}
+
+	/**
+	  *  Processes the passed in config file
+	  *
+	  *  @param fileHandler  $fh   file handler
+	  *
+	  *  @return array
+	  */
+	private function processConfigFile ($fh) {
+		$configs = array();  
+		while (($line = fgets($fh)) !== false) {
+			if (strpos($line, '=') == false) {
+				continue;
+			}	
+
+			if ($this->isComment($line)) {
+				continue;
+			} 
+
+			list($name, $value) = explode("=",  $line);
+			$name =  trim($name);
+			$value = trim($value);
+			if ($this->isBool($value)) {
+				$value = $this->getBoolean($value);
+			}
+			if ($this->isNumeric($value)) {
+				$value = $this->getNumeric($value);
+			}
+			
+			$configs[$name] = $value;
+		}
+
+		return $configs;
+	}
+
+	/**
+	  *  Check to see if the a line is a comment or not
+	  *
+	  *  @param  string   $line    A line (via file)
+	  *
+	  *	 @return boolean
+	  */
+	private function isComment($line) {
+		if (empty($line)) {
+			return false;
+		}
+
+		if (preg_match('/^#.*/', $line)) {
+			return true;
+		}
+
+		return false;
+	}
+}
+
+$parse = new Config_File_Parser();
+$parse->run();
